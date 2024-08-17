@@ -1,0 +1,36 @@
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Calculando a media: ");
+		Scanner s = new Scanner (System.in);
+		double media = 0;
+		double mediaFinal = 0;
+		String situacao = "";
+		
+// 		Entrada;
+
+		System.out.println("Insira o primeiro valor: ");
+		double valor1 = s.nextDouble();
+		System.out.println("Insira o segundo valor: ");
+		double valor2 = s.nextDouble();
+		
+// 		Cálculo;
+
+		media = (valor1 + valor2) /2;
+		
+		if (media > 6 ) { 
+		situacao = "Acima da média.";
+		}
+		
+		else {
+		situacao = "Abaixo da média.";
+		
+		}
+// 		Saída;
+
+		System.out.println("Média final: " + media);
+		System.out.println("Situação: " + situacao);
+		
+		}
+}
