@@ -1,3 +1,27 @@
+Necessidade:
+
+Criar um sistema em python em uma landing page que consiga mostrar e gerar um arquivo em formato excel para ser baixado que tem por objetivo organizar financeiramente valores de uma pessoa ou família que tem gastos diários, mensais e anuais. 
+Os cálculos precisam ser distribuídos em conformidade com o valor inserido (salário/renda mensal) que é o único dado que o usuário precisa inserir, queira poderá ser inserido outros valores adicionais como por exemplo: extra, décimo terceiro, 
+empréstimo ou por serviço específico realizado. No cálculo precisa distribuir entre os porcentagens de gastos por categorias. Inicialmente as categorias serão: Moradia: Inclui aluguel ou prestações de imóveis, condomínio, IPTU, Internet, 
+contas de água e luz, e manutenção; Alimentação: Abrange supermercado, delivery, restaurantes e lanches, Transporte: Inclui combustível, manutenção de veículos, transporte público e serviços de aplicativo, 
+Saúde: Engloba plano de saúde, consultas médicas, medicamentos e tratamentos, Educação: Cursos, mensalidades escolares ou universitárias e materiais de estudo, Despesas Pessoais: Inclui vestuário, higiene pessoal, cosméticos e academias,
+Lazer e Entretenimento: Assinaturas de serviços de streaming (como Spotify e Netflix), idas ao cinema, passeios e viagens, 
+Pets: Gastos com alimentação, veterinário e pet shop, Impostos e Taxas: IOF, IPVA, taxas de lixo e outros impostos relacionados ao seu estilo de vida.
+Outros: Inclui gastos eventuais e de objetivos de longo prazo, como presentes, doações, ou fundos para uma viagem. Para cada categoria priorize os seguintes percentuais: Moradia: (25%) Alimentação: (12%) 
+Transporte: (8%) Saúde: (8%) Educação: (6%) Despesas Pessoais: (6%) Lazer: (6%) Pets: (3%) Impostos: (3%) Reserva / Valor Extra: (17%)
+
+create:
+financas/
+│
+├── app.py                ← Código principal
+├── requirements.txt      ← Dependências
+
+installs
+
+pip install streamlit pandas openpyxl
+pip install streamlit
+streamlit hello
+
 Projeto em desenvolvimento:
 
 Modelo sugerido de distribuição percentual: PageFinanco
