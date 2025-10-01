@@ -1,6 +1,38 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import os
+senha = os.environ.get("EMAIL_SENHA")
+
+
+def enviar_email_feedback(comentario):
+    remetente = "andreprogramador@gmail.com"
+    destinatario = "andreprogramador@gmail.com"  # pode ser o mesmo ou outro
+    senha = ""  # NÃO usar senha de login do Gmail
+
+    assunto = "Novo feedback negativo recebido"
+    corpo = f"Comentário recebido no app:\n\n{comentario if comentario else '[Sem comentário]'}"
+
+    # Criação da mensagem
+    msg = MIMEMultipart()
+    msg["From"] = remetente
+    msg["To"] = destinatario
+    msg["Subject"] = assunto
+    msg.attach(MIMEText(corpo, "plain"))
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as servidor:
+            servidor.starttls()
+            servidor.login(remetente, senha)
+            servidor.send_message(msg)
+        return True
+    except Exception as e:
+        print("Erro ao enviar e-mail:", e)
+        return False
+
 
 # Dicionário de categorias e percentuais
 CATEGORIAS = {
@@ -44,7 +76,7 @@ def main():
     st.markdown("""
     Este sistema calcula a distribuição ideal de seus gastos mensais com base na sua **renda**.
     """)
-    
+
     # Entrada principal
     renda_base = st.number_input("Informe sua Renda Mensal (R$):", min_value=0.0, step=100.0, format="%.2f")
 
@@ -74,5 +106,33 @@ def main():
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
 
+    # ---------------------------
+    # Seção de Feedback
+    # ---------------------------
+    st.markdown("---")
+    st.subheader("📣 Envie seu feedback")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("👍 Gostei"):
+            st.success("Obrigado pelo feedback positivo! 😊")
+
+    with col2:
+        if st.button("👎 Não gostei"):
+            with st.form("form_feedback_negativo", clear_on_submit=True):
+                comentario = st.text_area("Nos diga o que podemos melhorar (opcional):")
+                enviado = st.form_submit_button("Enviar Feedback")
+                if enviado:
+                    sucesso = enviar_email_feedback(comentario)
+                    if sucesso:
+                        st.success("Obrigado pelo seu feedback! Ele foi enviado com sucesso. 📩")
+                else:
+                    st.error("Não foi possível enviar o feedback por e-mail. Tente novamente mais tarde.")
+
 if __name__ == "__main__":
     main()
+
+
+# Orientações:
+# executar: python -m streamlit run app.py
